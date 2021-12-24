@@ -6,18 +6,26 @@ myForm.addEventListener('submit', onSubmit);
 function onSubmit(e) {
   e.preventDefault();
   
+    const nameInput = e.target.name.value;
+    const emailInput = e.target.email.value;
+    // const phoneInput = e.target.phone.value;
+   
 
-    let myObj = {
-     nameInput : e.target.name.value,
-     emailInput : e.target.email.value,
-     phoneInput : e.target.phone.value
-    // localStorage.setItem('name',nameInput);
-    // localStorage.setItem('email', emailInput);
-    // localStorage.setItem('phone', phoneInput);
-};
-    let myobj_seialized = JSON.stringify(myObj);
-    localStorage.setItem("myObj",myobj_seialized);
-    let myObj_deserialized =JSON.parse(localStorage.getItem("myObj"))
-    console.log(myObj_deserialized);
-    
+const myObj= {
+        nameInput,
+        emailInput,
+}
+    localStorage.setItem(myObj.emailInput,JSON.stringify(myObj))
+    //  let myObj_converted = JSON.stringify(myObj);
+    // localStorage.setItem(myObj.emailInput,myObj_converted);
+    // let myObj_unconverted =JSON.parse(localStorage.getItem("myObj"))
+    // console.log(myObj_unconverted);
+    showNewUserOnScreen(myObj)
+}
+
+function showNewUserOnScreen(user){
+    const parentNode = document.getElementById('listOfPeople');
+    const childHTML = `<li> ${user.nameInput} - ${user.emailInput} </li>`
+
+    parentNode.innerHTML = parentNode.innerHTML + childHTML;
 }
